@@ -23,7 +23,7 @@
 
 namespace Swnck\PureRequest\http;
 
-use Swnck\PureRequest\http\frame\PureResponseFrame;
+use Swnck\PureRequest\http\frame\ResponseFrame;
 use Swnck\PureRequest\http\misc\body\BodyFrame;
 use Swnck\PureRequest\http\misc\header\HeaderFrame;
 use Swnck\PureRequest\http\util\Method;
@@ -31,10 +31,16 @@ use Swnck\PureRequest\http\util\StatusCode;
 
 class PureRequest {
 
+    public function __construct(
+    )
+    {
+
+    }
+
     public function get(HeaderFrame $headers, callable $response, string $url = ""): void
     {
 
-        $responseFrame = new PureResponseFrame(
+        $responseFrame = new ResponseFrame(
             StatusCode::Accepted,
             "sss"
         );
@@ -46,7 +52,7 @@ class PureRequest {
     public function post(HeaderFrame $headers, BodyFrame $frame, callable $response, string $url = "")
     {
 
-        $responseFrame = new PureResponseFrame(
+        $responseFrame = new ResponseFrame(
             StatusCode::Accepted,
             "post loco"
         );

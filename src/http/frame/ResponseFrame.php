@@ -24,7 +24,7 @@ namespace Swnck\PureRequest\http\frame;
 
 use Swnck\PureRequest\http\util\StatusCode;
 
-class PureResponseFrame
+class ResponseFrame
 {
     public function __construct(
         private readonly StatusCode $statusCode,

@@ -23,7 +23,7 @@
 
 namespace Swnck\PureRequest;
 
-use Swnck\PureRequest\http\frame\PureResponseFrame;
+use Swnck\PureRequest\http\frame\ResponseFrame;
 use Swnck\PureRequest\http\misc\body\BodyContent;
 use Swnck\PureRequest\http\misc\header\HeaderContent;
 use Swnck\PureRequest\http\PureRequest;
@@ -37,11 +37,11 @@ class BasePureRequest
         //Tests:
         $request = new PureRequest();
 
-        $request->get(HeaderContent::paste(["Content-Type" => ContentType::APPLICATION_JSON]), function (PureResponseFrame $response) {
+        $request->get(HeaderContent::paste(["Content-Type" => ContentType::APPLICATION_JSON]), function (ResponseFrame $response) {
             echo $response->getContent();
         });
 
-        $request->post(HeaderContent::paste(["Content-Type" => ContentType::APPLICATION_JSON]), BodyContent::empty(), function (PureResponseFrame $response) {
+        $request->post(HeaderContent::paste(["Content-Type" => ContentType::APPLICATION_JSON]), BodyContent::empty(), function (ResponseFrame $response) {
             echo $response->getContent();
         });
     }
