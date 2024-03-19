@@ -51,5 +51,15 @@ class BasePureRequest
         ]), function (ResponseFrame $response) {
             echo $response->getContent();
         }, "url");
+
+        $request->post(HeaderContent::paste(["Content-Type" => ContentType::APPLICATION_JSON, "Connection" => "keep-alive"]), BodyContent::empty(), function (ResponseFrame $response) {
+            echo $response->getContent();
+            echo $response->getStatusCode();
+        }, "url");
+
+        $request->post(HeaderContent::empty(), BodyContent::empty(), function (ResponseFrame $response) {
+            echo $response->getContent();
+            echo $response->getStatusCode();
+        }, "url");
     }
 }

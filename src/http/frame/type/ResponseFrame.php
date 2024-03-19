@@ -43,8 +43,16 @@ class ResponseFrame implements Frame
     /**
      * @return StatusCode
      */
-    public function getStatusCode(): StatusCode
+    public function getStatusCodeObject(): StatusCode
     {
         return $this->statusCode;
+    }
+
+    /**
+     * @return int
+     */
+    public function getStatusCode(): int
+    {
+        return $this->getStatusCodeObject()->value;
     }
 }
