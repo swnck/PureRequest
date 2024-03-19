@@ -95,6 +95,6 @@ enum StatusCode: int
     case DEFAULT = 0;
 
     public static function getStatusCodeEnum(int $code): StatusCode {
-        return StatusCode::tryFrom($code) ?? throw new \InvalidArgumentException($code);
+        return StatusCode::tryFrom($code) ?? StatusCode::DEFAULT;
     }
 }

@@ -46,7 +46,7 @@ class RequestModel implements Model
         $response = curl_exec($ch);
 
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $statusCode = StatusCode::tryFrom($code) ?? StatusCode::DEFAULT;
+        $statusCode = StatusCode::getStatusCodeEnum($code);
 
         try {
             if (curl_errno($ch)) throw new \Exception(curl_error($ch)); //Logical error
