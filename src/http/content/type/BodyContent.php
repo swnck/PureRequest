@@ -36,7 +36,6 @@ class BodyContent implements Content
 
     #[\Override] public static function empty(): BodyFrame
     {
-
         return new BodyFrame([]);
     }
 }
