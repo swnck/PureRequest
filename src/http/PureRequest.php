@@ -65,9 +65,9 @@ class PureRequest {
     }
 
     /**
-     * @return RequestConfiguration
+     * @return RequestConfiguration|null
      */
-    public function getConfiguration(): RequestConfiguration
+    public function getConfiguration(): ?RequestConfiguration
     {
         return $this->configuration;
     }

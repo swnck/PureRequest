@@ -24,7 +24,6 @@
 namespace Swnck\PureRequest;
 
 use Swnck\PureRequest\http\config\RequestConfiguration;
-use Swnck\PureRequest\http\config\ssl\SslConfiguration;
 use Swnck\PureRequest\http\content\type\BodyContent;
 use Swnck\PureRequest\http\content\type\HeaderContent;
 use Swnck\PureRequest\http\frame\type\ResponseFrame;
@@ -35,7 +34,6 @@ class BasePureRequest
 {
     public function __construct()
     {
-
         //Tests:
         $request = new PureRequest((new RequestConfiguration())
             ->setReturnTransfer(true)

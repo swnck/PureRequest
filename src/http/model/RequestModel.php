@@ -41,18 +41,16 @@ class RequestModel implements Model
 
         $headers = [];
         foreach ($headerFrame->getHeaders() as $key => $value) {
-            if ($value instanceof \UnitEnum) {
-                $value = $value->value;
-            }
+            if ($value instanceof \UnitEnum) $value = $value->value;
             $headers[] = "$key: $value";
         }
 
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, $this->request->getConfiguration()->isReturnTransfer());
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, $this->request->getConfiguration()->isFollowLocation());
-        curl_setopt($ch, CURLOPT_TIMEOUT, $this->request->getConfiguration()->getTimeout());
-        curl_setopt($ch, CURLOPT_MAXREDIRS, $this->request->getConfiguration()->getMaxRedirects());
+        curl_setopt($ch, CURLOPT_URL, $url); //ToDo: Change this hardcoded stuff a little bit:
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, ($this->request->getConfiguration() == null || $this->request->getConfiguration()->isReturnTransfer()));
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, ($this->request->getConfiguration() == null || $this->request->getConfiguration()->isFollowLocation()));
+        curl_setopt($ch, CURLOPT_TIMEOUT, ($this->request->getConfiguration() == null ? 30 : $this->request->getConfiguration()->getTimeout()));
+        curl_setopt($ch, CURLOPT_MAXREDIRS, ($this->request->getConfiguration() == null ? 10 : $this->request->getConfiguration()->getMaxRedirects()));
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
