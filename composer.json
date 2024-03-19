@@ -1,0 +1,17 @@
+{
+    "name": "swnck/pure-request",
+    "description": "A streamlined PHP library for hassle-free HTTP requests, simplifying web communication without the complexity of cURL.",
+    "license": "Apache License",
+    "autoload": {
+        "psr-4": {
+            "Swnck\\PureRequest\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "swnck",
+            "email": "datapack3t.contact@gmail.com"
+        }
+    ],
+    "require": {}
+}
