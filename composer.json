@@ -1,7 +1,7 @@
 {
     "name": "swnck/pure-request",
     "description": "A streamlined PHP library for hassle-free HTTP requests, simplifying web communication without the complexity of cURL.",
-    "license": "Apache License",
+    "license": "Apache-2.0",
     "autoload": {
         "psr-4": {
             "Swnck\\PureRequest\\": "src/"
