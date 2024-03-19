@@ -23,9 +23,11 @@
 
 namespace Swnck\PureRequest;
 
-use Swnck\PureRequest\http\frame\ResponseFrame;
-use Swnck\PureRequest\http\misc\body\BodyContent;
-use Swnck\PureRequest\http\misc\header\HeaderContent;
+use Swnck\PureRequest\http\config\RequestConfiguration;
+use Swnck\PureRequest\http\config\ssl\SslConfiguration;
+use Swnck\PureRequest\http\content\type\BodyContent;
+use Swnck\PureRequest\http\content\type\HeaderContent;
+use Swnck\PureRequest\http\frame\type\ResponseFrame;
 use Swnck\PureRequest\http\PureRequest;
 use Swnck\PureRequest\http\util\ContentType;
 
@@ -35,14 +37,19 @@ class BasePureRequest
     {
 
         //Tests:
-        $request = new PureRequest();
+        $request = new PureRequest((new RequestConfiguration())
+            ->setReturnTransfer(true)
+        );
 
-        $request->get(HeaderContent::paste(["Content-Type" => ContentType::APPLICATION_JSON]), function (ResponseFrame $response) {
+        $request->get(HeaderContent::empty(), function (ResponseFrame $response) {
             echo $response->getContent();
-        });
+        }, "url");
 
-        $request->post(HeaderContent::paste(["Content-Type" => ContentType::APPLICATION_JSON]), BodyContent::empty(), function (ResponseFrame $response) {
+        $request->post(HeaderContent::paste(["Content-Type" => ContentType::APPLICATION_JSON]), BodyContent::paste([
+            "email" => "",
+            "password" => ""
+        ]), function (ResponseFrame $response) {
             echo $response->getContent();
-        });
+        }, "url");
     }
 }

@@ -20,10 +20,22 @@
  * limitations under the License.
  */
 
-namespace Swnck\PureRequest\http\util;
+namespace Swnck\PureRequest\http\content\type;
 
-enum Method
+use Swnck\PureRequest\http\content\Content;
+use Swnck\PureRequest\http\frame\type\HeaderFrame;
+
+class HeaderContent implements Content
 {
-    case GET;
-    case POST;
+    #[\Override] public static function paste($array): HeaderFrame
+    {
+        $finalHeaders = [];
+        foreach ($array as $key => $value) $finalHeaders[$key] = $value;
+        return new HeaderFrame($finalHeaders);
+    }
+
+    #[\Override] public static function empty(): HeaderFrame
+    {
+        return new HeaderFrame([]);
+    }
 }

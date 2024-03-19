@@ -23,6 +23,15 @@
 namespace Swnck\PureRequest\http\util;
 
 enum ContentType: string {
-    case TEXT_PLAIN = 'text\plain';
-    case APPLICATION_JSON = 'application\json';
+    case TEXT_PLAIN = 'text/plain';
+    case APPLICATION_JSON = 'application/json';
+    case APPLICATION_XML = 'application/xml';
+    case TEXT_HTML = 'text/html';
+    case APPLICATION_FORM_URLENCODED = 'application/x-www-form-urlencoded';
+    case MULTIPART_FORM_DATA = 'multipart/form-data';
+    case APPLICATION_JAVASCRIPT = 'application/javascript';
+    case APPLICATION_PDF = 'application/pdf';
+    case IMAGE_JPEG = 'image/jpeg';
+    case IMAGE_PNG = 'image/png';
+    case APPLICATION_OCTET_STREAM = 'application/octet-stream';
 }

@@ -20,9 +20,11 @@
  * limitations under the License.
  */
 
-namespace Swnck\PureRequest\http\misc\header;
+namespace Swnck\PureRequest\http\frame\type;
 
-class HeaderFrame
+use Swnck\PureRequest\http\frame\Frame;
+
+class HeaderFrame implements Frame
 {
 
     public function __construct(

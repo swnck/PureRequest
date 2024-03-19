@@ -20,19 +20,23 @@
  * limitations under the License.
  */
 
-namespace Swnck\PureRequest\http\misc\header;
+namespace Swnck\PureRequest\http\content\type;
 
-class HeaderContent
+use Swnck\PureRequest\http\content\Content;
+use Swnck\PureRequest\http\frame\type\BodyFrame;
+
+class BodyContent implements Content
 {
-    public static function paste($array): HeaderFrame
+    #[\Override] public static function paste($array): BodyFrame
     {
-        $finalHeaders = [];
-        foreach ($array as $key => $value) $finalHeaders[$key] = $value;
-        return new HeaderFrame($finalHeaders);
+        $finalBody = [];
+        foreach ($array as $key => $value) $finalBody[$key] = $value;
+        return new BodyFrame($finalBody);
     }
 
-    public static function empty(): HeaderFrame
+    #[\Override] public static function empty(): BodyFrame
     {
-        return new HeaderFrame([]);
+
+        return new BodyFrame([]);
     }
 }

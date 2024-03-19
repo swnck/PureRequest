@@ -20,19 +20,31 @@
  * limitations under the License.
  */
 
-namespace Swnck\PureRequest\http\misc\body;
+namespace Swnck\PureRequest\http\frame\type;
 
-class BodyContent
+use Swnck\PureRequest\http\frame\Frame;
+use Swnck\PureRequest\http\util\StatusCode;
+
+class ResponseFrame implements Frame
 {
-    public static function paste($array): BodyFrame
+    public function __construct(
+        private readonly StatusCode $statusCode,
+        private readonly string $content
+    ) {}
+
+    /**
+     * @return String
+     */
+    public function getContent(): string
     {
-        $finalBody = [];
-        foreach ($array as $key => $value) $finalBody[$key] = $value;
-        return new BodyFrame($finalBody);
+        return $this->content;
     }
 
-    public static function empty(): BodyFrame
+    /**
+     * @return StatusCode
+     */
+    public function getStatusCode(): StatusCode
     {
-        return new BodyFrame([]);
+        return $this->statusCode;
     }
 }

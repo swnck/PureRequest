@@ -22,7 +22,8 @@
 
 namespace Swnck\PureRequest\http\util;
 
-enum StatusCode: int {
+enum StatusCode: int
+{
     case Continue = 100;
     case SwitchingProtocols = 101;
     case Processing = 102; // WebDAV
@@ -90,4 +91,10 @@ enum StatusCode: int {
     case LoopDetected = 508; // WebDAV
     case NotExtended = 510;
     case NetworkAuthenticationRequired = 511;
+
+    case DEFAULT = 0;
+
+    public static function getStatusCodeEnum(int $code): StatusCode {
+        return StatusCode::tryFrom($code) ?? throw new \InvalidArgumentException($code);
+    }
 }

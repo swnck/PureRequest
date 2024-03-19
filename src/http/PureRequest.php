@@ -23,39 +23,52 @@
 
 namespace Swnck\PureRequest\http;
 
-use Swnck\PureRequest\http\frame\ResponseFrame;
-use Swnck\PureRequest\http\misc\body\BodyFrame;
-use Swnck\PureRequest\http\misc\header\HeaderFrame;
-use Swnck\PureRequest\http\util\Method;
-use Swnck\PureRequest\http\util\StatusCode;
+use Swnck\PureRequest\http\config\RequestConfiguration;
+use Swnck\PureRequest\http\content\type\BodyContent;
+use Swnck\PureRequest\http\frame\type\BodyFrame;
+use Swnck\PureRequest\http\frame\type\HeaderFrame;
+use Swnck\PureRequest\http\frame\type\ResponseFrame;
+use Swnck\PureRequest\http\model\RequestModel;
 
 class PureRequest {
 
     public function __construct(
-    )
-    {
-
-    }
+        public ?RequestConfiguration $configuration = null
+    ){}
 
     public function get(HeaderFrame $headers, callable $response, string $url = ""): void
     {
+        $requestModel = new RequestModel($this);
+        $modelInformation = $requestModel->build($headers, BodyContent::empty(), $url);
 
         $responseFrame = new ResponseFrame(
-            StatusCode::Accepted,
-            "sss"
+            $modelInformation->getStatusCode(),
+            $modelInformation->getResponse()
         );
-        var_dump($headers);
+
         $response($responseFrame);
 
     }
 
-    public function post(HeaderFrame $headers, BodyFrame $frame, callable $response, string $url = "")
+    public function post(HeaderFrame $headers, BodyFrame $frame, callable $response, string $url): void
     {
 
+        $requestModel = new RequestModel($this);
+        $modelInformation = $requestModel->build($headers, $frame, $url);
+
         $responseFrame = new ResponseFrame(
-            StatusCode::Accepted,
-            "post loco"
+            $modelInformation->getStatusCode(),
+            $modelInformation->getResponse()
         );
+
         $response($responseFrame);
+    }
+
+    /**
+     * @return RequestConfiguration
+     */
+    public function getConfiguration(): RequestConfiguration
+    {
+        return $this->configuration;
     }
 }
